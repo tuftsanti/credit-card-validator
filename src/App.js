@@ -1,23 +1,78 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [num, setNumber] = React.useState("")
+
+  const checkNumber = (num) => {
+    // console.log(num)
+    if ((num.length === 13 || num.length === 15 || num.length === 16) && num.length < 17) {
+      // console.log(num.length)
+      let magicNumber = 0
+      for (let x = num.length - 2; x > -1; x -= 2) {
+        // console.log(num[x])
+        if (num[x] * 2 > 9) {
+          magicNumber += ((num[x] * 2) % 10) + 1
+          // console.log(magicNumber)
+        } 
+        else {
+          magicNumber += num[x] * 2
+          // console.log(magicNumber)
+        }
+        console.log(magicNumber)
+      }
+      // console.log(typeof(magicNumber))
+      // num = parseInt(num)
+      for (let i = num.length - 1; i > -1; i -= 2) {
+        // console.log(typeof(num))
+        console.log(num[i])
+        magicNumber += parseInt(num[i])
+      }
+      console.log(`Magic Number is: ${magicNumber}`)
+
+      if (magicNumber % 10 === 0 && num.length === 15 && (num[1] == 4 || num[1] == 7)) {
+        console.log(`${num} is an AMEX`)
+      }
+      else if (magicNumber % 10 === 0 && num.length === 16 && num[0] == 5 && (num[1] == 1 || num[1] == 2 || num[1] == 3 || num[1] == 4 || num[1] == 5)) {
+        console.log(`${num} is a MASTERCARD`)
+      }
+      else if (magicNumber % 10 === 0 && num[0] == 4 && (num.length === 13 || num.length === 16)) {
+        console.log(`${num} is a VISA`)
+      }
+      else {
+        console.log(`${num} is an INVALID num`)
+      }
+    }
+    else {
+      console.log(`${num} is an INVALID num`)
+    }
+  }
+
+  // const handleChange = (e) => {
+  //   this.setState({value: e.target.value})
+  // }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // console.log(`${num} was submitted.`)
+    checkNumber(num)
+    setNumber("")
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <form onSubmit={handleSubmit }>
+          <label>
+            Input Credit Card Number<br/>
+            <input 
+              name="num"
+              type="num"
+              value={num} 
+              onChange={e => setNumber(e.target.value)}/>
+          </label>
+          <button>SUBMIT</button>
+        </form>
       </header>
     </div>
   );
