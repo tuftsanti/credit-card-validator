@@ -4,7 +4,9 @@ import './App.css';
 function App() {
   const [num, setNumber] = React.useState("")
 
-  const checkNumber = (num) => {
+  let result = null
+
+  const checkNumber = (num, result) => {
     // console.log(num)
     if ((num.length === 13 || num.length === 15 || num.length === 16) && num.length < 17) {
       // console.log(num.length)
@@ -31,16 +33,22 @@ function App() {
       console.log(`Magic Number is: ${magicNumber}`)
 
       if (magicNumber % 10 === 0 && num.length === 15 && (num[1] == 4 || num[1] == 7)) {
-        console.log(`${num} is an AMEX`)
+        // console.log(`${num} is an AMEX`)
+        result = 'AMEX'
       }
-      else if (magicNumber % 10 === 0 && num.length === 16 && num[0] == 5 && (num[1] == 1 || num[1] == 2 || num[1] == 3 || num[1] == 4 || num[1] == 5)) {
-        console.log(`${num} is a MASTERCARD`)
+      else if (magicNumber % 10 === 0 && num.length === 16 && (num[0] == 5 || num[0] == 2) && (num[1] == 1 || num[1] == 2 || num[1] == 3 || num[1] == 4 || num[1] == 5)) {
+        // console.log(`${num} is a MASTERCARD`)
+        console.log(result)
+        result = 'MASTERCARD'
+        console.log(result)
       }
       else if (magicNumber % 10 === 0 && num[0] == 4 && (num.length === 13 || num.length === 16)) {
-        console.log(`${num} is a VISA`)
+        // console.log(`${num} is a VISA`)
+        result = 'VISA'
       }
       else {
-        console.log(`${num} is an INVALID num`)
+        // console.log(`${num} is an INVALID num`)
+        result = 'INVALID'
       }
     }
     else {
@@ -73,6 +81,7 @@ function App() {
           </label>
           <button>SUBMIT</button>
         </form>
+        <h1>{result ? result : `NAN`}</h1>
       </header>
     </div>
   );
