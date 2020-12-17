@@ -1,12 +1,44 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  const [num, setNumber] = React.useState("")
+const h1text = {
+  color: 'orange'
+}
 
-  let result = null
+// function App() {
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      input:'',
+      // show: false,
+      value: '',
+      number: '',
+      result: '',
+    }
+  }
 
-  const checkNumber = (num, result) => {
+  // const [num, setNumber] = React.useState("")
+  setNumber (e) {
+    // console.log(this.state.input)
+    this.setState({ input: e.target.value });
+    // console.log(this.state.input)
+  }
+  // let result = null
+
+  // const handleSubmit = (e) => {
+  handleSubmit (e)  {
+    e.preventDefault()
+    // console.log(`${num} was submitted.`)
+    // console.log(this.state.input)
+    this.checkNumber(this.state.input)
+    e.target.reset()
+    // this.setState({input: ''})
+    // this.state.input = ''
+    // console.log(this.state.result)
+  }
+
+  checkNumber (num, result, number) {
     // console.log(num)
     if ((num.length === 13 || num.length === 15 || num.length === 16) && num.length < 17) {
       // console.log(num.length)
@@ -21,70 +53,90 @@ function App() {
           magicNumber += num[x] * 2
           // console.log(magicNumber)
         }
-        console.log(magicNumber)
+        // console.log(magicNumber)
       }
       // console.log(typeof(magicNumber))
       // num = parseInt(num)
       for (let i = num.length - 1; i > -1; i -= 2) {
         // console.log(typeof(num))
-        console.log(num[i])
+        // console.log(num[i])
         magicNumber += parseInt(num[i])
       }
       console.log(`Magic Number is: ${magicNumber}`)
-
-      if (magicNumber % 10 === 0 && num.length === 15 && (num[1] == 4 || num[1] == 7)) {
+      const firstFourNumbers = num.slice(0,4)
+      // console.log(firstFourNumbers)
+      if (magicNumber % 10 === 0 && num.length === 15 && (parseInt(num[1]) === 4 || parseInt(num[1]) === 7)) {
         // console.log(`${num} is an AMEX`)
-        result = 'AMEX'
+        // this.result = 'AMEX'
+        result = `American Express`
+        number = this.state.input;
+        this.setState({result, number})
       }
-      else if (magicNumber % 10 === 0 && num.length === 16 && (num[0] == 5 || num[0] == 2) && (num[1] == 1 || num[1] == 2 || num[1] == 3 || num[1] == 4 || num[1] == 5)) {
+      else if (magicNumber % 10 === 0 && num.length === 16 && (parseInt(num[0]) === 5 || parseInt(num[0]) === 2) && (1 <= parseInt(num[1]) <= 5)) {
         // console.log(`${num} is a MASTERCARD`)
-        console.log(result)
-        result = 'MASTERCARD'
-        console.log(result)
+        // console.log(result)
+        result = `Mastercard`
+        number = this.state.input;
+        this.setState({result, number})
+        // console.log(result)
       }
-      else if (magicNumber % 10 === 0 && num[0] == 4 && (num.length === 13 || num.length === 16)) {
+      else if (magicNumber % 10 === 0 && parseInt(num[0]) === 4 && (num.length === 13 || num.length === 16)) {
         // console.log(`${num} is a VISA`)
-        result = 'VISA'
+        result = `VISA`
+        number = this.state.input;
+        this.setState({result, number})
+      }
+      else if (magicNumber % 10 === 0 && num.length === 16 && parseInt(firstFourNumbers) === 6011) {
+        // console.log(`${num} is a DISCOVER`)
+        result = `DISCOVER`
+        number = this.state.input;
+        this.setState({result, number})
       }
       else {
         // console.log(`${num} is an INVALID num`)
-        result = 'INVALID'
+        result = `INVALID`
+        number = this.state.input;
+        this.setState({result, number})
       }
     }
     else {
-      console.log(`${num} is an INVALID num`)
+      // console.log(`${num} is an INVALID num`)
+      result = `INVALID`
+        number = this.state.input;
+        this.setState({result, number})
     }
   }
 
   // const handleChange = (e) => {
   //   this.setState({value: e.target.value})
   // }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // console.log(`${num} was submitted.`)
-    checkNumber(num)
-    setNumber("")
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <form onSubmit={(e) => this.handleSubmit(e)}>
+            <label>
+              Input Credit Card Number<br/>
+              <input 
+                placeholder="Enter number..."
+                name="number"
+                type="number"
+                // value={this.num} 
+                onChange={e => this.setNumber(e)}/>
+            </label>
+            <button>SUBMIT</button>
+          </form>
+          {this.state.number ? 
+            <>
+              <h1 style={h1text}>{this.state.number}</h1><br/>
+              is a/an <br/>
+              <h1 style={h1text}>{this.state.result}</h1><br/>
+              credit card number
+            </> : ''}
+        </header>
+      </div>
+    );
   }
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <form onSubmit={handleSubmit }>
-          <label>
-            Input Credit Card Number<br/>
-            <input 
-              name="num"
-              type="num"
-              value={num} 
-              onChange={e => setNumber(e.target.value)}/>
-          </label>
-          <button>SUBMIT</button>
-        </form>
-        <h1>{result ? result : `NAN`}</h1>
-      </header>
-    </div>
-  );
 }
 
 export default App;
