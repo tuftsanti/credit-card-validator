@@ -63,7 +63,10 @@ class App extends Component {
         magicNumber += parseInt(num[i])
       }
       console.log(`Magic Number is: ${magicNumber}`)
-      const firstFourNumbers = num.slice(0,4)
+      const firstTwoNumbers = parseInt(num.slice(0,2))
+      const firstThreeNumbers = parseInt(num.slice(0,3))
+      const firstFourNumbers = parseInt(num.slice(0,4))
+      // console.log(typeof(firstTwoNumbers, firstThreeNumbers, firstFourNumbers))
       // console.log(firstFourNumbers)
       if (magicNumber % 10 === 0 && num.length === 15 && (parseInt(num[1]) === 4 || parseInt(num[1]) === 7)) {
         // console.log(`${num} is an AMEX`)
@@ -86,9 +89,21 @@ class App extends Component {
         number = this.state.input;
         this.setState({result, number})
       }
-      else if (magicNumber % 10 === 0 && num.length === 16 && parseInt(firstFourNumbers) === 6011) {
+      else if (magicNumber % 10 === 0 && num.length === 16 && (firstFourNumbers === 6011 || (firstThreeNumbers >= 644 && firstThreeNumbers <= 649) || firstThreeNumbers === 622)){
         // console.log(`${num} is a DISCOVER`)
-        result = `DISCOVER`
+        result = `Discover`
+        number = this.state.input;
+        this.setState({result, number})
+      }
+      else if (magicNumber % 10 === 0 && num.length === 16 && firstTwoNumbers === 35) {
+        // console.log(`${num} is a JCB`)
+        result = `JCB`
+        number = this.state.input;
+        this.setState({result, number})
+      }
+      else if (magicNumber % 10 === 0 && ((num.length === 16 && (firstTwoNumbers === 38 || firstTwoNumbers === 39)) || (num.length === 14 && ((firstThreeNumbers >= 300 && firstThreeNumbers <= 305) || firstThreeNumbers === 309 || firstTwoNumbers === 36)))) {
+        // console.log(`${num} is a Diner's Club`)
+        result = `Diner's Club`
         number = this.state.input;
         this.setState({result, number})
       }
