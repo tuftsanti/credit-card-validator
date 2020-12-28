@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-
+import Table from 'react-bootstrap/Table'
+// import bootstrap from 'bootstrap'
+// const bootstrap = require('bootstrap') 
 const h1text = {
   color: 'orange'
 }
@@ -40,7 +42,7 @@ class App extends Component {
 
   checkNumber (num, result, number) {
     // console.log(num)
-    if ((num.length === 13 || num.length === 15 || num.length === 16) && num.length < 17) {
+    if ((num.length === 13 || num.length === 14 || num.length === 15 || num.length === 16) && num.length < 17) {
       // console.log(num.length)
       let magicNumber = 0
       for (let x = num.length - 2; x > -1; x -= 2) {
@@ -129,9 +131,45 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <h1>Credit Card Validator</h1>
+          <h4>Enter a credit card number of the 6 below to check it's validity. Test one out using the table or try your own!</h4>
+          <Table size="sm" variant="light" bordered>
+            <thead>
+              <tr>
+                <th>Card Type</th>
+                <th>Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>American Express</td>
+                <td>378282246310005</td>
+              </tr>
+              <tr>
+                <td>Diner's Club</td>
+                <td>30569309025904</td>
+              </tr>
+              <tr>
+                <td>Discover</td>
+                <td>6011000990139424</td>
+              </tr>
+              <tr>
+                <td>JCB</td>
+                <td>3566002020360505</td>
+              </tr>
+              <tr>
+                <td>Mastercard</td>
+                <td>2223016768739313</td>
+              </tr>
+              <tr>
+                <td>VISA</td>
+                <td>4012888888881881</td>
+              </tr>
+            </tbody>
+          </Table>
           <form onSubmit={(e) => this.handleSubmit(e)}>
             <label>
-              Input Credit Card Number<br/>
+              Card Number<br/>
               <input 
                 placeholder="Enter number..."
                 name="number"

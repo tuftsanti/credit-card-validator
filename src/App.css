@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  text-decoration: underline;
+}
+h4 {
+  padding: 30px;
+  margin: 0 2rem;
+}
+form {
+  padding: 20px;
+  margin: 20px
+}
+
+Table {
+  background-color: ghostwhite;
+  color: cadetblue;
+  font-size: 1rem;
+  padding: 10px;
+  text-align: left;
+  border: 1.5px solid cadetblue;
+  border-radius: 10px;
+}
+
+th {
+  padding: 10px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+td {
+  padding: 5px;
+}
