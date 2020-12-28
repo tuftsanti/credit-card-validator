@@ -132,7 +132,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>Credit Card Validator</h1>
-          <h4>Enter a credit card number of the 6 below to check it's validity. Test one out using the table or try your own!</h4>
+          <h4>Enter a credit card number of the 6 types below to check it's validity. Test one out using the table or try your own!</h4>
           <Table size="sm" variant="light" bordered>
             <thead>
               <tr>
