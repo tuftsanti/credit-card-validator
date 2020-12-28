@@ -1,4 +1,5 @@
-## Another Credit Card Validator - https://ccvalidator.netlify.app/
+## Another Credit Card Validator
+https://ccvalidator.netlify.app/
 
 A web based app built from the CS50 homework, translated to ReactJS
 
